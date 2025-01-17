@@ -1,0 +1,156 @@
+/* flex class */
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-sb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-start {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+}
+
+.flex-end {
+    justify-content: flex-end !important;
+}
+
+.flex-col {
+    flex-direction: column !important;
+}
+
+.flex-right {
+    align-items: right !important;
+    justify-content: right;
+}
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gap-1 {
+    gap: 1rem !important;
+}
+
+.gap-2 {
+    gap: 1.5rem !important;
+}
+
+.gap-3 {
+    gap: 3rem !important;
+}
+.gap-20{
+    gap: 20px !important;
+}
+.p-0 {
+    padding: 0;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.p-relative {
+    position: relative;
+}
+
+.mt-1 {
+    margin-top: 1rem !important;
+}
+
+.mt-3 {
+    margin-top: 3rem !important;
+}
+
+.mt-4 {
+    margin-top: 4rem !important;
+}
+.mt-15{
+    margin-top: 1.5rem !important;
+}
+.mt-45 {
+    margin-top: 4.5rem !important;
+}
+
+.mb-3 {
+    margin-bottom: 3rem !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.w-16 {
+    width: 16.66666667%;
+}
+
+.w-33{
+    width: 33%;
+}
+
+.w-50{
+    width: 50%;
+}
+
+.w-66{
+    width: 66%;
+}
+.w-100{
+    width: 100%;
+}
+.d-block {
+    display: block;
+}
+.btn_hover1{
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50px;
+    /* border: 1.5px solid var(--main-color-2); */
+    border: none;
+    color: var(--colo-white-3);
+    z-index: 1;
+    letter-spacing: 0.8px;
+    background: linear-gradient(var(--main-color-1) 0%, var(--colo-primary-card));
+    cursor: pointer;
+}
+.btn_hover1::before{
+    border-radius: 50px;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease-in;
+    background: linear-gradient(42deg, var(--main-color-2) 0.01%, var(--main-color-1) 100%);
+    z-index: -1;
+    top: 0;
+    right: 0;
+}
+.btn_hover1:hover::before{
+    width: 0;
+    background: linear-gradient(42deg, var(--main-color-2) 0.01%, var(--main-color-1) 100%);
+}
+.max-p{
+    padding: 0px 370px;
+}
+@media (max-width: 1400px){
+    .max-p {
+        padding: 0 116px;
+    }
+}
+@media (max-width: 785px){
+    .max-p {
+        padding: 20px;
+    }
+}
