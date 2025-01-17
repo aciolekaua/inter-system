@@ -1,3 +1,58 @@
+// ... rest of the code remains the same until showSection function ...
+
+function showSection(sectionId) {
+  document.querySelectorAll('.section').forEach(section => {
+    section.classList.add('d-none');
+  });
+  
+  const targetSection = document.getElementById(sectionId);
+  if (targetSection) {
+    targetSection.classList.remove('d-none');
+  }
+  
+  const sectionTitles = {
+    'dashboard': 'Dashboard',
+    'classificacao-geral': 'Classificação Geral',
+    'modalidades': 'Modalidades',
+    'confrontos': 'Gerenciamento de Confrontos',
+    'pontuacoes': 'Pontuações por Modalidade',
+    'calendario': 'Calendário de Eventos',
+    'votacao': 'Votação - Modalidade Dança',
+    'usuarios': 'Gerenciamento de Usuários',
+    'relatorios': 'Relatórios',
+    'galeria': 'Galeria',
+    'notificacoes': 'Notificações',
+    'ajuda': 'Ajuda',
+    'configuracoes': 'Configurações'
+  };
+
+  const currentSection = document.getElementById('currentSection');
+  if (currentSection) {
+    currentSection.textContent = sectionTitles[sectionId] || sectionId;
+  }
+  
+  document.querySelectorAll('.sidebar-nav a').forEach(link => {
+    link.classList.remove('active');
+  });
+  const activeLink = document.querySelector(`#nav-${sectionId}`);
+  if (activeLink) {
+    activeLink.classList.add('active');
+  }
+
+  // Handle section-specific rendering
+  if (sectionId === 'pontuacoes') {
+    window.dashboard?.renderizarPontuacoes();
+  } else if (sectionId === 'modalidades') {
+    window.modalidades?.renderizarModalidades();
+  } else if (sectionId === 'votacao') {
+    window.votacao?.renderizarSistemaDanca();
+  } else if (sectionId === 'calendario') {
+    window.calendar?.renderCalendar();
+  }
+}
+
+// ... rest of the code remains the same until DashboardManager class declaration ...
+
 class DashboardManager {
   constructor() {
     this.classificacao = [];
@@ -198,7 +253,7 @@ class DashboardManager {
                         </td>
                         <td>${item.vitoriasTotais}</td>
                         <td>
-                          <button class="btn btn-sm btn-primary" onclick="dashboard.mostrarDetalhesModalidades('${item.turma}')">
+                          <button class="btn btn-sm btn-primary" onclick="window.dashboard.mostrarDetalhesModalidades('${item.turma}')">
                             Ver Detalhes
                           </button>
                         </td>
@@ -466,7 +521,7 @@ class DashboardManager {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="filtroModalidade">Filtrar por Modalidade</label>
-                      <select class="form-control" id="filtroModalidade" onchange="dashboard.filtrarPontuacoes()">
+                      <select class="form-control" id="filtroModalidade" onchange="window.dashboard.filtrarPontuacoes()">
                         <option value="todas">Todas as Modalidades</option>
                         ${Object.keys(this.modalidades).flatMap(categoria => 
                           this.modalidades[categoria].map(modalidade => 
@@ -479,7 +534,7 @@ class DashboardManager {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="filtroTurma">Filtrar por Turma</label>
-                      <select class="form-control" id="filtroTurma" onchange="dashboard.filtrarPontuacoes()">
+                      <select class="form-control" id="filtroTurma" onchange="window.dashboard.filtrarPontuacoes()">
                         <option value="todas">Todas as Turmas</option>
                         ${this.classificacao.map(item => 
                           `<option value="${item.turma}">${item.turma}</option>`
@@ -663,11 +718,15 @@ function showSection(sectionId) {
     activeLink.classList.add('active');
   }
 
-  // Call specific render functions based on section
+  // Handle section-specific rendering
   if (sectionId === 'pontuacoes') {
-    dashboard.renderizarPontuacoes();
+    window.dashboard?.renderizarPontuacoes();
   } else if (sectionId === 'modalidades') {
-    // modalidades.renderizarModalidades();
+    window.modalidades?.renderizarModalidades();
+  } else if (sectionId === 'votacao') {
+    window.votacao?.renderizarSistemaDanca();
+  } else if (sectionId === 'calendario') {
+    window.calendar?.renderCalendar();
   }
 }
 
@@ -680,5 +739,5 @@ function showLoginModal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const dashboard = new DashboardManager();
+  window.dashboard = new DashboardManager();
 });
